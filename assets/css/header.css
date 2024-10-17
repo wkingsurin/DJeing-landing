@@ -1,0 +1,54 @@
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.container {}
+
+.header-container {
+    max-width: 920px;
+}
+
+.content {
+    display: flex;
+}
+
+.header-block {
+    display: flex;
+    align-items: center;
+
+    height: 120px;
+}
+.header-block > *:not(:last-child) {
+    margin-right: 65px;
+}
+
+.logo {
+    display: flex;
+
+    width: 223px;
+    height: 60px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.navigation {
+}
+
+.navigation-list {
+    display: flex;
+}
+.navigation-list > *:not(:last-child) {
+    margin-right: 56px;
+}
+
+.list-item {
+}
+
+.item-link {
+    font-weight: 600;
+    color: inherit;
+}

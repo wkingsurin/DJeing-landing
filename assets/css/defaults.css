@@ -1,3 +1,12 @@
+html {
+    font-family: 'Poppins';
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+
+    background-color: #1C1B21;
+}
+
 .container {
     max-width: 1110px;
     padding: 0 15px;
