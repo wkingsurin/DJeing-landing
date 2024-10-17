@@ -1,45 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
+
 <body>
 
-    <header class="header">
-        <div class="container header-container">
-            <div class="content header-block">
-                <div class="logo">
-                    <img src="./assets/images/logo.png" alt="logo" name="logo">
+    <div class="wrapper">
+        <header class="header">
+            <div class="container header-container">
+                <div class="content header-block">
+                    <div class="logo">
+                        <img src="./assets/images/logo.png" alt="logo" name="logo">
+                    </div>
+                    <nav class="navigation">
+                        <ul class="navigation-list">
+                            <li class="list-item">
+                                <a href="#" class="item-link">About</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="#" class="item-link">News</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="#" class="item-link">Music</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="#" class="item-link">Media</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="#" class="item-link">Tours</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="#" class="item-link">Contacts</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                <nav class="navigation">
-                    <ul class="navigation-list">
-                        <li class="list-item">
-                            <a href="#" class="item-link">About</a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#" class="item-link">News</a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#" class="item-link">Music</a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#" class="item-link">Media</a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#" class="item-link">Tours</a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#" class="item-link">Contacts</a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
-        </div>
-    </header>
-    
+        </header>
+
+        <main class="main">
+            <section class="section hero-section">
+                <div class="container">
+                    <div class="content hero-block">
+                        <div class="hero__title-block">
+                            <span class="subtitle title">new single</span>
+                            <h2 class="name">war for love</h2>
+                        </div>
+                        <div class="controls">
+                            <button class="play">
+                                <svg class="icon" width="22" height="25" viewBox="0 0 22 25" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 12.5L8.14564e-07 25L1.90735e-06 -9.6165e-07L22 12.5Z" fill="white" />
+                                </svg>
+                            </button>
+                            <div class="range">
+                                <input type="range" class="track" value="25" min="0" max="100">
+                                <div class="progress"></div>
+                            </div>
+                            <div class="time">
+                                <div class="current">00:22</div>
+                                <span class="separator">-</span>
+                                <div class="total">02:54</div>
+                            </div>
+                            <!-- CONTROLS -->
+                        </div>
+                    </div>
+                </div>
+                <div class="section-background">
+                    <div class="gradient"></div>
+                    <img src="./assets/images/hero/background-image.jpg" alt="Background">
+                </div>
+            </section>
+        </main>
+
+        <!-- <div class="title-block">
+            <div class="icon-block">
+                <img src="./assets/images/amplitude-icon.png" alt="Amplitude">
+            </div>
+            <h2 class="title">bright lights</h2>
+        </div> -->
+    </div>
+
     <script src="./app.js"></script>
 </body>
+
 </html>
