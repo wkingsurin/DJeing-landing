@@ -92,9 +92,6 @@
     overflow: hidden;
 }
 .about-section .image-block img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 /* QUOTE */
@@ -147,6 +144,7 @@
 }
 .quote-block .text {
     font-size: 18px;
+    line-height: 27px;
     opacity: 1;
 }
 .quote-block .text::after {
@@ -172,7 +170,4 @@
     max-height: 483px;
 }
 .about-section .about-block:nth-child(2) img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }

@@ -81,14 +81,8 @@
     background: white;
     /* background: #7A66CC; */
 }
-.track::-webkit-progress-bar {
-    background: #7A66CC;
-}
 .track::-ms-fill-lower {
     background: #7A66CC;
-}
-.track::-webkit-progress-value {
-    background: red;
 }
 .progress {
     position: absolute;
@@ -100,6 +94,9 @@
 
 .time {
     display: flex;
+}
+.time > * {
+    font-weight: 500;
 }
 
 .current {}
@@ -120,9 +117,6 @@
 }
 
 .section-background img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .gradient {
