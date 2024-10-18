@@ -9,6 +9,3 @@
 .main > *:not(:first-child) {
     padding: 90px 0;
 }
-.main > *:nth-child(3) {
-    padding: 90px 0 60px;
-}
