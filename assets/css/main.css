@@ -1,6 +1,13 @@
 @import url('./hero-section.css');
+@import url('./news-section.css');
 
 .main {
 }
 .section {
+}
+.main > *:not(:last-child) {
+    margin-bottom: 90px;
+}
+.main > *:first-child {
+    margin-bottom: unset;
 }

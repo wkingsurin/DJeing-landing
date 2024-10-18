@@ -87,12 +87,15 @@
 .track::-ms-fill-lower {
     background: #7A66CC;
 }
+.track::-webkit-progress-value {
+    background: red;
+}
 .progress {
     position: absolute;
     width: 25%;
     height: 1px;
 
-    /* background: #7A66CC; */
+    background: #7A66CC;
 }
 
 .time {
