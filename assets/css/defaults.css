@@ -32,6 +32,8 @@ html {
 .title-block {
     display: flex;
     align-items: center;
+
+    margin-bottom: 60px;
 }
 .title-block .icon-block {
     display: flex;

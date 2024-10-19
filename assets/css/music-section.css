@@ -1,0 +1,156 @@
+.music-section {
+}
+.container {
+}
+.content {
+}
+.music-block {
+    justify-content: space-between;
+}
+.music-block > *:not(:last-child) {
+    margin-right: 20px;
+}
+.music-block .block {
+    flex: 1 1 50%;
+    max-width: 540px;
+}
+.music-block .block:nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+}
+.music-block .block-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    height: 100%;
+}
+.music-section .outside-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 510px;
+    width: 100%;
+    max-height: 510px;
+    height: 100%;
+
+    background: rgba(122, 102, 204, .3);
+    border-radius: 50%;
+}
+.music-section .inside-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 472px;
+    width: 100%;
+    max-height: 472px;
+    height: 100%;
+
+    background: rgba(122, 102, 204, .6);
+    border-radius: 50%;
+}
+.inside-circle .image-block {
+    display: flex;
+    max-width: 434px;
+    max-height: 434px;
+}
+.inside-circle img {
+}
+.title-block {
+}
+.icon-block {
+}
+.title {
+}
+.music-block .controls {
+    width: 100%;
+    margin-bottom: 50px;
+}
+.play {
+}
+.icon {
+}
+.range {
+}
+.track {
+}
+.progress {
+}
+.time {
+}
+.current {
+}
+.separator {
+}
+.total {
+}
+.music-block .list {
+}
+.music-block .list > *:not(:last-child) {
+    margin-bottom: 20px;
+}
+.music-block .music-list {
+    margin-bottom: 50px;;
+}
+.music-block .list-item {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+}
+.music-block .list-item.playing .item-name {
+    color: #7A66CC;
+    font-weight: 600;
+}
+.music-block .item-marker {
+    position: absolute;
+
+    font-size: 14px;
+    font-weight: bold;
+    opacity: .5;
+}
+.music-block .list-item .item-name {
+    font-size: 18px;
+    font-weight: 400;
+
+    margin-left: 35px;
+}
+.music-block .socials {
+    display: flex;
+}
+.music-block .socials span {
+    font-size: 24px;
+    font-weight: 600;
+}
+.music-block .socials > *:first-child {
+    margin-right: 40px;
+}
+.music-block .links {
+    display: flex;
+}
+.music-block .links > *:not(:last-child) {
+    margin-right: 30px;
+}
+.music-block .links-item {
+    display: flex;
+    align-items: center;
+}
+.music-block .links-item > *:not(:last-child) {
+    margin-right: 10px;
+}
+.music-block .links-item .item-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+.music-block .links-item .icon-block {
+    display: flex;
+    align-items: center;
+}
+.music-block .links-item .icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

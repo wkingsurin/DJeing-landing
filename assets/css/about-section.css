@@ -25,9 +25,6 @@
 }
 .about-section .block-content {
 }
-.about-section .about-block:nth-child(1) .block:nth-child(1) .block-content > *:not(:last-child) {
-    margin-bottom: 60px;
-}
 .about-section .block:nth-child(2) .block-content {
     position: relative;
 
@@ -53,6 +50,7 @@
 .about-section .description {
     display: flex;
     flex-direction: column;
+    margin-bottom: 60px;
 }
 .about-section .description > *:not(:last-child) {
     margin-bottom: 24px;
