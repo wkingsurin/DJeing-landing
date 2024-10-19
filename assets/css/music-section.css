@@ -69,7 +69,12 @@
     width: 100%;
     margin-bottom: 50px;
 }
-.play {
+.music-block .play {
+    min-width: 25px;
+    min-height: 22px;
+}
+.music-block .play .icon {
+    object-fit: contain;
 }
 .icon {
 }
