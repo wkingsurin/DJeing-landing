@@ -68,6 +68,8 @@
     -webkit-appearance: none;
     appearance: none;
     -moz-appearance: none;
+    
+    transition: .1s ease-in-out;
 }
 .track::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -77,6 +79,8 @@
     margin-top: -9px;
 
     background: #7A66CC;
+
+    transition: .1s ease-in-out;
 }
 .track::-webkit-slider-runnable-track {
     height: 1px;

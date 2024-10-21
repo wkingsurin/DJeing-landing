@@ -1,34 +1,49 @@
+const musicList = ['Nirvana-Smells-Like-Teen-Spirit.mp3', 'Nirvana-Heart-Shaped-Box.mp3', '', '', '', '', '']
+
 const playButtons = document.querySelectorAll('.play')
-const audio = document.querySelector('.audio')
-// audio.muted = true
 
-const track = document.querySelector('.track')
-const trackFullWidth = track.clientWidth
+playButtons.forEach((button, index) => {
+    const parent = button.parentNode
 
-track.max = getDuration(audio, true)
-track.value = 0
+    const audio = parent.querySelector('.audio')
+    audio.muted = true
+    audio.src = `./assets/music/${musicList[index]}`
 
-const progress = document.querySelector('.progress')
-progress.style.width = '0px'
+    const track = parent.querySelector('.track')
+    const trackFullWidth = track.clientWidth
+    track.value = 0
 
-const time = document.querySelector('.time')
+    let playing = false
 
-const current = time.querySelector('.current')
-current.textContent = `00:00`
+    const progress = parent.querySelector('.progress')
+    progress.style.width = '0px'
 
-const total = time.querySelector('.total')
-total.textContent = correctTime(getDuration(audio, true))
+    const time = parent.querySelector('.time')
 
-let playing = false
+    const current = time.querySelector('.current')
+    current.textContent = `00:00`
 
-playButtons.forEach(button => {
+    const total = time.querySelector('.total')
+    total.textContent = `00:00`
+
     let timer
+
     let currentDuration = 0
     let currentStep = 0
-    const fullDuration = getDuration(audio, true)
-    const step = trackFullWidth / fullDuration
+
+    let fullDuration
+    let step
+
     const icons = Array.from(button.children)
 
+    audio.addEventListener('loadedmetadata', function setFullDuration(e) {
+        track.max = getDuration(audio, true)
+        fullDuration = getDuration(audio, true)
+        step = trackFullWidth / fullDuration
+
+        total.textContent = correctTime(getDuration(e.currentTarget, true))
+    })
+    
     button.addEventListener('click', (e) => {
         changeIcon(icons)
 
@@ -60,10 +75,7 @@ playButtons.forEach(button => {
     })
 })
 
-function play(audio, src) {
-    if (src) {
-        audio.src = `${src}`
-    }
+function play(audio) {
     audio.play()
 }
 
@@ -105,8 +117,4 @@ function correctTime(time) {
 function setProgress(options) {
     options.track.value = options.currentTime
     options.progressBar.style.width = options.currentStep * options.step + 'px'
-}
-
-function controls() {
-
 }
