@@ -1,6 +1,15 @@
 const playButtons = document.querySelectorAll('.play')
 const audio = document.querySelector('.audio')
-audio.muted = true
+// audio.muted = true
+
+const track = document.querySelector('.track')
+const trackFullWidth = track.clientWidth
+
+track.max = getDuration(audio, true)
+track.value = 0
+
+const progress = document.querySelector('.progress')
+progress.style.width = '0px'
 
 const time = document.querySelector('.time')
 
@@ -13,24 +22,35 @@ total.textContent = correctTime(getDuration(audio, true))
 let playing = false
 
 playButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        let currentDuration = 0
-        const fullDuration = getDuration(audio, true)
-        let timer
+    let timer
+    let currentDuration = 0
+    let currentStep = 0
+    const fullDuration = getDuration(audio, true)
+    const step = trackFullWidth / fullDuration
+    const icons = Array.from(button.children)
 
-        const icons = Array.from(e.currentTarget.children)
+    button.addEventListener('click', (e) => {
         changeIcon(icons)
 
         if (playing) {
-            pause(timer)
+            pause(audio, timer)
             playing = false
         } else {
-            play()
+            play(audio)
             playing = true
             timer = setInterval(() => {
+                currentStep += 1
                 currentDuration += 1
 
                 current.textContent = correctTime(currentDuration)
+
+                setProgress({
+                    progressBar: progress,
+                    currentTime: currentDuration,
+                    track: track,
+                    step,
+                    currentStep
+                })
 
                 if (currentDuration === fullDuration) {
                     clearInterval(timer)
@@ -40,11 +60,14 @@ playButtons.forEach(button => {
     })
 })
 
-function play(event) {
+function play(audio, src) {
+    if (src) {
+        audio.src = `${src}`
+    }
     audio.play()
 }
 
-function pause(timer) {
+function pause(audio, timer) {
     audio.pause()
     clearInterval(timer)
 }
@@ -77,4 +100,13 @@ function correctTime(time) {
     }
 
     return `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+}
+
+function setProgress(options) {
+    options.track.value = options.currentTime
+    options.progressBar.style.width = options.currentStep * options.step + 'px'
+}
+
+function controls() {
+
 }
