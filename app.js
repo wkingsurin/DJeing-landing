@@ -1,4 +1,4 @@
-const musicList = ['Nirvana-Smells-Like-Teen-Spirit.mp3', 'Nirvana-Heart-Shaped-Box.mp3', '', '', '', '', '']
+import { musicList } from '/assets/utils.js'
 
 const playButtons = document.querySelectorAll('.play')
 
@@ -43,7 +43,7 @@ playButtons.forEach((button, index) => {
 
         total.textContent = correctTime(getDuration(e.currentTarget, true))
     })
-    
+
     button.addEventListener('click', (e) => {
         changeIcon(icons)
 
