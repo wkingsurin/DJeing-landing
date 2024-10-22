@@ -1,4 +1,4 @@
-import { musicList } from '/assets/utils.js'
+import { musicList, getCorrectName, arrayFromNodeLst } from '/assets/utils.js'
 
 function init() {
     const lastTracks = arrayFromNodeLst(document.querySelectorAll('[name="music"]'))
@@ -226,20 +226,6 @@ function correctTime(time) {
 function setProgress(options) {
     options.track.value = options.currentTime
     options.progressBar.style.width = options.currentStep * options.step + 'px'
-}
-
-function arrayFromNodeLst(nodeList) {
-    return Array.from(nodeList)
-}
-
-function getCorrectName(musicName) {
-    const name = musicName.split('.')
-    name.pop()
-
-    const joinedName = name.join('')
-    const newName = joinedName.split('-')
-    newName.splice(1, 0, '-')
-    return newName.join(' ')
 }
 
 init()
