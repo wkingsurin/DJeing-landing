@@ -2,13 +2,14 @@ import { musicList, getCorrectName, arrayFromNodeLst } from '/assets/utils.js'
 
 function init() {
     const lastTracks = arrayFromNodeLst(document.querySelectorAll('[name="music"]'))
+    const musicListButton = document.querySelector('.music-section').querySelector('.play')
 
     {
         const playButton = document.querySelector('.play')
         const parent = playButton.parentNode
 
         const audio = parent.querySelector('.audio')
-        audio.muted = true
+        // audio.muted = true
         audio.src = `./assets/music/${musicList[0]}`
 
         const track = parent.querySelector('.track')
@@ -47,15 +48,14 @@ function init() {
         })
 
         playButton.addEventListener('click', (e) => {
-            changeIcon(icons, audio)
-
             if (playing) {
                 pause(audio)
                 clearInterval(timer)
                 playing = false
+                changeIcon(icons, false)
             } else {
                 play(audio)
-                playing = true
+
                 timer = setInterval(() => {
                     currentStep += 1
                     currentDuration += 1
@@ -74,26 +74,41 @@ function init() {
                         clearInterval(timer)
                     }
                 }, 1000)
+
+                playing = true
+                changeIcon(icons, true)
             }
         })
     }
 
     {
         let timer
+        let playing = false
+        let previous = null
+        let parent
+        let audio
+        let track
+        let trackFullWidth
+
+        let currentDuration = 0
+        let currentStep = 0
+
+        let fullDuration
+        let step
+
+        let icons
 
         lastTracks.forEach((music, index) => {
-            const parent = music.closest('.block-content')
-            const audio = parent.querySelector('.audio')
+            parent = music.closest('.block-content')
+            audio = parent.querySelector('.audio')
             // audio.muted = true
             audio.src = `./assets/music/${musicList[0]}`
 
-            let previous = null
 
             music.textContent = getCorrectName(musicList[index])
 
-            const track = parent.querySelector('.track')
-            const trackFullWidth = track.clientWidth
-            track.value = 0
+            track = parent.querySelector('.track')
+            trackFullWidth = track.clientWidth
 
             const progress = parent.querySelector('.progress')
             progress.style.width = '0px'
@@ -106,56 +121,43 @@ function init() {
             const total = time.querySelector('.total')
             total.textContent = `00:00`
 
-            let currentDuration = 0
-            let currentStep = 0
+            icons = arrayFromNodeLst(parent.querySelector('.play').children)
 
-            let fullDuration
-            let step
+            audio.addEventListener('loadedmetadata', function setFullDuration(e) {
+                track.max = getDuration(audio, true)
+                fullDuration = getDuration(audio, true)
+                step = trackFullWidth / fullDuration
 
-            let playing = false
-
-            const icons = arrayFromNodeLst(parent.querySelector('.play').children)
-
-            // 
-            track.max = getDuration(audio, true)
-            fullDuration = getDuration(audio, true)
-            step = trackFullWidth / fullDuration
-            // 
+                total.textContent = correctTime(getDuration(e.currentTarget, true))
+            })
 
             music.addEventListener('click', (e) => {
                 e.preventDefault()
 
                 clearInterval(timer)
 
-                // 
-                currentStep = 0
-                currentDuration = 0
+                if (previous != music.textContent || previous == null) {
+                    currentStep = 0
+                    currentDuration = 0
 
-                if (previous == music.textContent) {
-                    console.log(`previous == music.textContent`)
-                } else if (previous != music.textContent || previous == null) {
-                    console.log(`previous != music.textContent`)
-                    // playing = !playing
+                    audio.src = `./assets/music/${musicList[index]}`
+
+                    playing = false
                 }
-                // 
-                
-                audio.src = `./assets/music/${musicList[index]}`
 
                 if (playing) {
                     pause(audio)
-                    console.log(`playing`)
+
                     playing = false
+
                     changeIcon(icons, false)
                 } else {
                     play(audio)
 
-                    console.log(`playing`)
-
-                    playing = true
-                    changeIcon(icons, true)
-                    previous = music.textContent
-
                     timer = setInterval(() => {
+                        currentStep += 1
+                        currentDuration += 1
+                        
                         current.textContent = correctTime(currentDuration)
 
                         setProgress({
@@ -166,13 +168,14 @@ function init() {
                             currentStep
                         })
 
-                        currentStep += 1
-                        currentDuration += 1
-
                         if (currentDuration === fullDuration) {
                             clearInterval(timer)
                         }
                     }, 1000)
+
+                    playing = true
+                    changeIcon(icons, true)
+                    previous = music.textContent
                 }
             })
         })
