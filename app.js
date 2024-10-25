@@ -102,92 +102,208 @@ function addControls(playButton, list) {
         total.textContent = correctTime(getDuration(e.currentTarget, true))
     })
 
-    if (!list) {
-        playButton.addEventListener('click', (e) => {
-            if (playing) {
-                pause(audio)
-                clearInterval(timer)
-                playing = false
-                changeIcon(icons, false)
-            } else {
-                play(audio)
 
-                timer = setInterval(() => {
-                    currentStep += 1
-                    currentDuration += 1
+    addClickEventListener({
+        elem: playButton,
+        isButton: true,
+        timer,
+        previous,
+        currentStep,
+        currentDuration,
+        audio,
+        playing,
+        icons,
+        current,
+        progress,
+        track,
+        step,
+        fullDuration
+    })
+    // playButton.addEventListener('click', (e) => {
+    //     if (playing) {
+    //         pause(audio)
+    //         clearInterval(timer)
+    //         playing = false
+    //         changeIcon(icons, false)
+    //     } else {
+    //         play(audio)
 
-                    current.textContent = correctTime(currentDuration)
+    //         timer = setInterval(() => {
+    //             currentStep += 1
+    //             currentDuration += 1
 
-                    setProgress({
-                        progressBar: progress,
-                        currentTime: currentDuration,
-                        track: track,
-                        step,
-                        currentStep
-                    })
+    //             current.textContent = correctTime(currentDuration)
 
-                    if (currentDuration === fullDuration) {
-                        clearInterval(timer)
-                    }
-                }, 1000)
+    //             setProgress({
+    //                 progressBar: progress,
+    //                 currentTime: currentDuration,
+    //                 track,
+    //                 step,
+    //                 currentStep
+    //             })
 
-                playing = true
-                changeIcon(icons, true)
-            }
-        })
-    } else {
+    //             if (currentDuration === fullDuration) {
+    //                 clearInterval(timer)
+    //             }
+    //         }, 1000)
+
+    //         playing = true
+    //         changeIcon(icons, true)
+    //     }
+    // })
+
+    if (list) {
         list.forEach((music, index) => {
             music.textContent = getCorrectName(musicList[index])
 
-            music.addEventListener('click', (e) => {
-                e.preventDefault()
-
-                clearInterval(timer)
-
-                if (previous != music.textContent || previous == null) {
-                    currentStep = 0
-                    currentDuration = 0
-
-                    audio.src = `./assets/music/${musicList[index]}`
-
-                    playing = false
-                }
-
-                if (playing) {
-                    pause(audio)
-
-                    playing = false
-
-                    changeIcon(icons, false)
-                } else {
-                    play(audio)
-
-                    timer = setInterval(() => {
-                        currentStep += 1
-                        currentDuration += 1
-
-                        current.textContent = correctTime(currentDuration)
-
-                        setProgress({
-                            progressBar: progress,
-                            currentTime: currentDuration,
-                            track: track,
-                            step,
-                            currentStep
-                        })
-
-                        if (currentDuration === fullDuration) {
-                            clearInterval(timer)
-                        }
-                    }, 1000)
-
-                    playing = true
-                    changeIcon(icons, true)
-                    previous = music.textContent
-                }
+            let rest = addClickEventListener({
+                elem: music,
+                isButton: false,
+                timer,
+                previous,
+                currentStep,
+                currentDuration,
+                audio,
+                playing,
+                index,
+                icons,
+                current,
+                progress,
+                track,
+                step,
+                fullDuration
             })
+
+            console.log(rest)
+
+            // music.addEventListener('click', (e) => {
+            //     e.preventDefault()
+
+            //     clearInterval(timer)
+
+            //     if (previous != music.textContent || previous == null) {
+            //         currentStep = 0
+            //         currentDuration = 0
+
+            //         audio.src = `./assets/music/${musicList[index]}`
+
+            //         playing = false
+            //     }
+
+            //     if (playing) {
+            //         pause(audio)
+
+            //         playing = false
+
+            //         changeIcon(icons, false)
+            //     } else {
+            //         play(audio)
+
+            //         timer = setInterval(() => {
+            //             currentStep += 1
+            //             currentDuration += 1
+
+            //             current.textContent = correctTime(currentDuration)
+
+            //             setProgress({
+            //                 progressBar: progress,
+            //                 currentTime: currentDuration,
+            //                 track,
+            //                 step,
+            //                 currentStep
+            //             })
+
+            //             if (currentDuration === fullDuration) {
+            //                 clearInterval(timer)
+            //             }
+            //         }, 1000)
+
+            //         playing = true
+            //         changeIcon(icons, true)
+            //         previous = music.textContent
+            //     }
+            // })
         })
     }
 }
 
 init()
+
+function addClickEventListener(options) {
+    let {
+        elem,
+        isButton,
+        timer,
+        previous,
+        currentStep,
+        currentDuration,
+        audio,
+        playing,
+        index,
+        icons,
+        current,
+        progress,
+        track,
+        step,
+        fullDuration
+    } = options
+
+    elem.addEventListener('click', (e) => {
+        if (!isButton) {
+            e.preventDefault()
+            clearInterval(timer)
+            console.log(`timer: ${timer}`)
+            console.log(`Не кнопка, очистка интервала!`)
+
+            if (previous != elem.textContent || previous == null) {
+                currentStep = 0
+                currentDuration = 0
+
+                audio.src = `./assets/music/${musicList[index]}`
+
+                playing = false
+            }
+        }
+
+        if (playing) {
+            pause(audio)
+
+            if (isButton) {
+                clearInterval(timer)
+            }
+
+            playing = false
+            changeIcon(icons, false)
+        } else {
+            play(audio)
+
+            timer = setInterval(() => {
+                currentStep += 1
+                currentDuration += 1
+
+                current.textContent = correctTime(currentDuration)
+
+                setProgress({
+                    progressBar: progress,
+                    currentTime: currentDuration,
+                    track,
+                    step,
+                    currentStep
+                })
+
+                if (currentDuration === fullDuration) {
+                    clearInterval(timer)
+                }
+            }, 1000)
+
+            playing = true
+            changeIcon(icons, true)
+
+            if (!isButton) {
+                previous = elem.textContent
+            }
+        }
+
+        return [timer, fullDuration, step]
+    })
+}
